@@ -8,7 +8,7 @@ We release our test code for secutiy projects in continue.
 
 [Attention]
 Now the source codes are for developer, which includes many dependeces such as MySQL, IPE, RocksDB, IPE, SRE, and so on.
-we will summarize the dependency requirements and provide simplified usages before July 4, 2024
+We will summarize the dependency requirements and provide simplified usages before July 4, 2023.
 
 ## Usage Instructions
 
