@@ -1,0 +1,161 @@
+'''
+布隆过滤器，在大量的数据中，判断某个数据是否存在时经常使用，有非常高效的空间效率与查询效率
+缺点：存在一定的误判率
+n:数据规模 p:要求的误判率
+二进制数据位数 m=-n*lnp/(ln2)^2
+哈希函数个数 k=m/n*ln2
+'''
+import ctypes
+import math
+import json
+
+class BloomFilter():
+    def __init__(self,n:int,p:float):
+        '''
+        :param n:数据规模
+        :param p:误判率
+        '''
+        #计算二进制数组规模与hash函数数量
+        self.bitSize=int(-n*math.log(p)/math.pow(math.log(2),2))
+        self.hashFuncSize=int(self.bitSize*math.log(2)/n)
+        #self.hashFuncSize =5
+        self.bitArray=[0]*(self.bitSize)
+        #self.H={}
+
+    def hashnum(self):
+        return self.hashFuncSize
+    def get_index_ij(self,value):
+        '''
+        :param value:存入的数据
+        '''
+        self.valueCheck(value)
+        #哈希值的设置参考google布隆过滤器源码
+        hash1=value.__hash__()
+        hash2=self.unsigned_right_shitf(hash1,16)
+        total_tag_index=[]
+        for i in range(self.hashFuncSize):
+            combinedHash=hash1+i*hash2
+            if combinedHash<0:
+                combinedHash=~combinedHash
+            combinedHash=combinedHash%self.bitSize
+            index = int(combinedHash / 1)  # 位于第index个int元素
+            total_tag_index.append(index)
+        return (total_tag_index, hash1)
+
+    def get_bitarray(self):
+        return self.bitArray
+    def get_bitnum(self):
+        return self.bitSize
+
+    def get_hash(self,value):
+        '''
+         :param value:存入的数据
+       '''
+        self.valueCheck(value)
+        #哈希值的设置参考google布隆过滤器源码
+        hash1=value.__hash__()
+        hash2=self.unsigned_right_shitf(hash1,16)
+        hash_list=[]
+        for i in range(self.hashFuncSize):
+            combinedHash=hash1+i*hash2
+            if combinedHash<0:
+                combinedHash=~combinedHash
+            combinedHash = combinedHash % self.bitSize
+            hash_list.append(combinedHash)
+        return hash_list
+
+    def add_tag(self,value):
+        '''
+        :param value:存入的数据
+        '''
+        self.valueCheck(value)
+        #哈希值的设置参考google布隆过滤器源码
+        hash1=value.__hash__()
+        hash2=self.unsigned_right_shitf(hash1,16)
+        for i in range(self.hashFuncSize):
+            combinedHash=hash1+i*hash2
+            if combinedHash<0:
+                combinedHash=~combinedHash
+            combinedHash=combinedHash%self.bitSize
+            index=int(combinedHash/1)#位于第index个int元素
+            position=combinedHash-index*32#在int中的位置
+            self.bitArray[index] =1
+            #self.bitArray[index]=self.bitArray[index]|(1<<position)
+
+    def contains(self,value):
+        '''
+        :param value:判断是否存在的数据
+        :return:True or False
+        '''
+        self.valueCheck(value)
+        hash1 = value.__hash__()
+        hash2 = self.unsigned_right_shitf(hash1,16)
+        for i in range(self.hashFuncSize):
+            combinedHash = hash1 + i * hash2
+            if combinedHash < 0:
+                combinedHash = ~combinedHash
+            combinedHash = combinedHash % self.bitSize
+            index = int(combinedHash / 1)  # 位于第index个int元素
+            position = combinedHash - index * 32  # 在int中的位置
+            result = self.bitArray[index]
+            #result= self.bitArray[index] & (1 << position)
+            if result==0:
+                return False
+        return True
+
+    def valueCheck(self, value):
+        if value != 0 and not value:
+            print('value can\'t be None')
+
+    def int_overflow(self,val):
+        maxint = 2147483647
+        if not -maxint - 1 <= val <= maxint:
+            val = (val + (maxint + 1)) % (2 * (maxint + 1)) - maxint - 1
+        return val
+
+    #无符号右移
+    def unsigned_right_shitf(self,n, i):
+        # 数字小于0，则转为32位无符号uint
+        if n < 0:
+            n = ctypes.c_uint32(n).value
+        # 正常位移位数是为正数，但是为了兼容js之类的，负数就右移变成左移好了
+        if i < 0:
+            return -self.int_overflow(n << abs(i))
+        # print(n)
+        return self.int_overflow(n >> i)
+
+    def convert_to_vector(self):
+        # 补0至长度为32的倍数
+        bits = self.bitArray + [0] * (32 - len(self.bitArray) % 32)
+        # 将列表拆分为长度为32的子列表
+        sublists = [bits[i:i+32] for i in range(0, len(bits), 32)]
+        # 将子列表转换为unsigned int值
+        ints = [int(''.join(str(bit) for bit in sublist), 2) & 0xffffffff for sublist in sublists]
+        return ints
+
+    def convert_to_vector_64(self):
+        # 补0至长度为64的倍数
+        bits = self.bitArray + [0] * (64 - len(self.bitArray) % 64)
+        # 将列表拆分为长度为32的子列表
+        sublists = [bits[i:i+32] for i in range(0, len(bits), 64)]
+        # 将子列表转换为unsigned int值
+        ints = [int(''.join(str(bit) for bit in sublist), 2) & 0xffffffffffffffff for sublist in sublists]
+        return ints
+
+    def convert_to_string(self):
+
+        return str(hash(tuple(self.bitArray)))
+
+
+# if __name__=='__main__':
+#     n=100000000
+#     p=0.01
+#     bf=BloomFilter(n,p)
+#     total_size=100000
+#     error_count=0
+#     for i in range(total_size):
+#         bf.put(i)
+#     for i in range(total_size):
+#         if not bf.contains(i):
+#             error_count+=1
+#     print('error rate :',float(error_count/total_size) if error_count>0 else 0)
