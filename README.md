@@ -4,7 +4,7 @@ Welcome to d-DSE (Distinct Dynamic Symmetirc Encryption) project, an ongoing pro
 We release our test code for secutiy projects in continue.
 
 
-## Prepare
+## Dependece
 
 
 
