@@ -17,7 +17,7 @@ We will summarize the dependency requirements and provide simplified usages befo
 
 ## License
 
-d-DSE is released under the [MIT License](./LICENSE). Make sure to review the license terms before using or contributing to this project.
+d-DSE is released under the [MIT License](./LICENSE) for d-DSE Cooperators. Make sure to review the license terms before using or contributing to this project.
 
 ## Contact
 
