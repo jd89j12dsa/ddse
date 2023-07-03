@@ -7,7 +7,7 @@ Install the python-C models for MITRA* .
 
 ```  
 sudo python3.6 setup_MITRAPP.py install
-sudo python3.6 setup_Diana_M.py install
+sudo python3.6 setup_DianaM.py install
 ```
 
 ## Usage Instructions
