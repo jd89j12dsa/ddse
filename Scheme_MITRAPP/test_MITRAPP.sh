@@ -1,0 +1,1 @@
+python3.6 MITRAPP_test_mongomysql.py DDSECrimeC bcds 701 0 

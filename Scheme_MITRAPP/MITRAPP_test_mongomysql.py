@@ -1,4 +1,4 @@
-import Diana
+import DianaM
 import MITRAPP
 import pymongo
 import time
@@ -46,7 +46,7 @@ def DB_Setup(test_db_name):
 	myclient = pymongo.MongoClient("mongodb://localhost:27017/?maxPoolSize=600&w=0")
 	mydb = myclient["MITRAPP"+test_db_name]
 	plaintextdb = myclient[test_db_name]
-	dur, ownerkey, keyleft, keyright = Diana.Setup()
+	dur, ownerkey, keyleft, keyright = DianaM.Setup()
 	create_mysql_table()
 
 def Encrypt(keyword,value_set,operation):
@@ -64,7 +64,7 @@ def Encrypt(keyword,value_set,operation):
 		dur, session = MITRAPP.PRF(ownerkey,keyword)
 		dur, retrievecipher = MITRAPP.AESEncrypt(session,plain)
 		#pdb.set_trace()
-		dur, ct1=Diana.Encrypt(keyword , keyword_counter[keyword])
+		dur, ct1=DianaM.Encrypt(keyword , keyword_counter[keyword])
 		ct2 = retrievecipher
 		keyword_counter[keyword] +=1
 		time_e = time.time()
@@ -99,7 +99,7 @@ def Ciphertext_Gen_Phase():
 			sector += 1000
 			result.append('len:\t'+str(entry_counter) +'\t'+ str(total_encrypt_time)+'\n')
 			if len(result) > 100:
-				print('wirtedata')
+				#print('wirtedata')
 				write_result("MitrappAdd",test_group,result)
 				result = []
 		upload_list.extend(Keywords_Cipher)
@@ -113,7 +113,9 @@ def Ciphertext_Gen_Phase():
 		t.start()
 		upload_list = []
 	if len(result) > 0:
-		write_result("MitrappAdd",test_group,result)	
+		write_result("MitrappAdd",test_group,result)
+
+	print('Average update time: ', total_encrypt_time/entry_counter)	
 
 	return
 
@@ -204,13 +206,13 @@ def Search(keyword):
 	if keyword not in keyword_counter:
 		return 0, ""
 	Conter = keyword_counter[keyword]
-	dur, k2, kc, kdepth = Diana.Trapdoor(keyword, Conter)
+	dur, k2, kc, kdepth = DianaM.Trapdoor(keyword, Conter)
 	minor_counter = 0
 	clause_list = []
 	clause = []
 	time_s = time.time()
 	for i in range(Conter):
-		dur, ctcheck = Diana.Search( i, k2, kc, kdepth)
+		dur, ctcheck = DianaM.Search( i, k2, kc, kdepth)
 		clause.append(ctcheck)
 		minor_counter+=1
 		if minor_counter == 50:
@@ -223,9 +225,11 @@ def Search(keyword):
 	result = complex_thread_find(clause_list)
 	time_e = time.time()
 	return time_e-time_s, result
+
 def Search_Phase():
 	global mydb,keyword_counter,ownerkey,plaintextdb
-	time.sleep(50)  # wait for writing log file
+
+	time.sleep(10)  # wait for writing log file
 	Search_time = dict()
 	latency = dict()
 	match_len = dict()
@@ -262,36 +266,38 @@ def Search_Phase():
 		Search_time[keyword] = time_e-time_s
 	write_search_time(test_group,latency,Search_time, match_len,result_len)
 
+	print('Rep. Kword result-\t', "Search_time: ", str(Search_time[task_search[0]]), '\tComm. cost: ', str(match_len[task_search[0]]/1024) + 'KB' + '\n')
+
 
 def write_search_time(test_group, latency, Search_time,match_len,result_len):
 
-	resultpath = "./Result"+ '/' + "MITRAPPSrch" + '/' + test_db_name + '/d' + str(del_num) + '/'
-	if os.path.exists(resultpath) == False:
-		os.makedirs(resultpath)	
+	# resultpath = "./Result"+ '/' + "MITRAPPSrch" + '/' + test_db_name + '/d' + str(del_num) + '/'
+	# if os.path.exists(resultpath) == False:
+	# 	os.makedirs(resultpath)	
 
-	filename = open( resultpath + str(test_group),'w')
-	for ke in Search_time:
-		filename.writelines('keyword:\t'+str(ke) +'\t'+ str(latency[ke]) + '\t' + str(Search_time[ke])+ '\t' + str(match_len[ke])+'\t'+ str(result_len[ke])+ '\n')
-	filename.close()
-
+	# filename = open( resultpath + str(test_group),'w')
+	# for ke in Search_time:
+	# 	filename.writelines('keyword:\t'+str(ke) +'\t'+ str(latency[ke]) + '\t' + str(Search_time[ke])+ '\t' + str(match_len[ke])+'\t'+ str(result_len[ke])+ '\n')
+	# filename.close()
+	pass
 
 
 def write_result(result_string,test_group,data):
-	resultpath = "./Result"+ '/' + result_string + '/' + test_db_name + '/d' + str(del_num) + '/'
-	if os.path.exists(resultpath) == False:
-		os.makedirs(resultpath)	
+	# resultpath = "./Result"+ '/' + result_string + '/' + test_db_name + '/d' + str(del_num) + '/'
+	# if os.path.exists(resultpath) == False:
+	# 	os.makedirs(resultpath)	
 
-	filename = open( resultpath + str(test_group),'a')
-	for d in data:
-		filename.writelines(d)
-	filename.close()
+	# filename = open( resultpath + str(test_group),'a')
+	# for d in data:
+	# 	filename.writelines(d)
+	# filename.close()
+	pass
 
 
 def Test():
 	l = list(test_phase)
-	print ('*********************************************')
-	print ('test_on ', test_db_name, 'del_num ', del_num)
-	print ('start test_group ', test_group)
+	print ('-----------Test Mitra*-----------')
+	print ('test_group: ', test_group, 'test_db_name: ', test_db_name, 'del_num: ', del_num)
 
 	if 'b' in l:
 		print('start initial db')
