@@ -19,7 +19,6 @@ def DB_Setup(test_db_name):
 	plaintextdb = myclient[test_db_name] 
 
 
-
 def write_result(result_string,test_group,data):
 	resultpath = "./Result"+ '/' + result_string + '/' + test_db_name + '/' + str(test_alpha) + '/' + str(test_axe) + '/'
 	if os.path.exists(resultpath) == False:
@@ -50,7 +49,9 @@ def Setup_phase(test_alpha,test_axe):
 	result.append("sett time:\t"+ str(stt)+"\n")
 	result.append("updatet time:\t"+ str(updatet)+"\n")
 
-	write_result("SealSetup", test_group, result)
+	#write_result("SealSetup", test_group, result)
+	for i in result:
+		print(i)
 
 def Search_phase():
 	global plaintextdb,seal
@@ -58,6 +59,9 @@ def Search_phase():
 	plaintext_cur = search_col.find(no_cursor_timeout=True).batch_size(1000)
 	x = plaintext_cur
 	task_search = [x["k"] for x in plaintext_cur]
+
+	# Top 1000 
+
 	task_search = task_search[0:1000]	
 
 	result_len = dict()
@@ -70,16 +74,17 @@ def Search_phase():
 		ts = time.time()
 		result = seal.Search(keyword)
 		result_len[keyword] = len(result)
-		result_size[keyword] = sum([getsize(i) for i in result_size])
+		result_size[keyword] = len(result)*Maintain_Consistent_com_level_ShieldDB
 		wiki_wl_v_off[cnt] = len(result)
 		result = list(filter(lambda x: x != '-1', result))
 		result = list(set(result))
 		Search_time[keyword] = time.time() - ts
 
 	print('Search_success')
-	write_search_time(test_group,Search_time, result_len,result_size)
-	resultpath = "./Result"+ '/' + "SealSrch" + '/' + test_db_name + '/' + str(test_alpha) + '/' + str(test_axe) + '/'
-	utilities.dump_data_to_file(wiki_wl_v_off,resultpath,"wiki_wl_v_off.pkl")
+	#write_search_time(test_group,Search_time, result_len,result_size)
+	#resultpath = "./Result"+ '/' + "SealSrch" + '/' + test_db_name + '/' + str(test_alpha) + '/' + str(test_axe) + '/'
+	#utilities.dump_data_to_file(wiki_wl_v_off,resultpath,"wiki_wl_v_off.pkl")
+	print('Rep. Kword result-\t', "Search_time: ", str(Search_time[task_search[0]]), '\tComm. cost: ', str(result_size[task_search[0]]) + '\n')
 
 def write_search_time(test_group,Search_time, result_len,result_size):
 	
@@ -89,22 +94,41 @@ def write_search_time(test_group,Search_time, result_len,result_size):
 	filename = open( resultpath + str(test_group),'w')
 
 	for ke in Search_time:
-		filename.writelines('keyword:\t'+str(ke) +'\t'+ str(Search_time[ke])+ '\t' +  str(result_len[ke]) + '\t' +str(result_size[ke]) + '\n')
+		filename.writelines('keyword:\t'+str(ke) +'\t'+ str(Search_time[ke])+ '\t' +  str(result_len[ke]) + '\t' +str(result_size[ke]/1024) + 'KB' + '\n')
 	filename.close()
 
 
 def Test(test_db_name,test_alpha,test_axe):
 
+	print('-----------Test Seal Comparsion-----------')
+
 	print('test_group: ',test_group,'test_db_name: ',test_db_name,'test_alpha: ',test_alpha,'test_axe: ',test_axe)
 
 	DB_Setup(test_db_name)
 	Setup_phase(test_alpha,test_axe)
-	Search_phase()
+	Search_phase()	
 
 if __name__ == '__main__':
 
 	faulthandler.enable()
 	test_db_name = str(sys.argv[1])
+
+	# Since Seal did not specify the dummy ciphertext length, we set parameters to eliminate this impact between Seal and ShieldDB
+
+	Maintain_Consistent_com_level_ShieldDB = 0
+	
+	if test_db_name == 'ToyDDSECrime':
+		Maintain_Consistent_com_level_ShieldDB = 1
+
+	if test_db_name == 'DDSECrimeC':
+		Maintain_Consistent_com_level_ShieldDB = 49
+
+	if test_db_name == 'DSEWikiC':
+		Maintain_Consistent_com_level_ShieldDB = 8.21875
+
+	if test_db_name == 'DDSE2022VAERSVAXC':
+		Maintain_Consistent_com_level_ShieldDB = 65
+
 	test_group = str(sys.argv[2])
 	test_alpha = int(sys.argv[3])
 	test_axe = int(sys.argv[4])
