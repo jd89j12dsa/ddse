@@ -21,19 +21,19 @@ The python version is v3.6.0
 
 1. Install <u>MongoDB</u> to provide datasets for various tests 
 
-sudo apt-get install mongodb
+```sudo apt-get install mongodb```
 
 2. Install <u>Pymongo</u> to read datasets
 
-pip3.6 install pymongo
+```pip3.6 install pymongo```
 
 3. Install <u>MySQL</u> to provide ciphertext storage
 
-sudo apt-get install mysql-server
+```sudo apt-get install mysql-server```
 
 4. Install pymysql
 
-pip3.6 install pymysql
+```pip3.6 install pymysql```
 
 
 ### Dependency for tests:
