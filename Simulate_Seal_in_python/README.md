@@ -3,7 +3,7 @@
 
 ## Dependency
 
-Install the python-C model for Odict(OMAP) and ORAM encapsulated from CCS18:
+Install the python-C model for Odict(OMAP) and ORAM encapsulated from [CCS18](https://github.com/jgharehchamani/SSE/tree/master/src/orion):
 
 ```  
 sudo python3.6 setup_OMAP.py install
@@ -17,4 +17,4 @@ We provide an exmaple for Seal on the Crimes dataset, which sets parameters `a=1
 
 To start the test, run the shell code:
 
-```sh test_Seal.sh``
+```sh test_Seal.sh```
