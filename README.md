@@ -4,6 +4,11 @@ Welcome to d-DSE (Distinct Dynamic Symmetirc Encryption) project, an ongoing pro
 We release our test code for secutiy projects in continue.
 
 
+## Attention
+
+Now the source codes are for developer, which includes many dependeces such as MySQL, IPE, RocksDB, IPE, SRE, and so on. We will summarize the dependency requirements and provide simplified usages before July 4, 2023.
+
+
 ## Environment
 
 Our experimental system is Ubuntu Server 16.04 x64
@@ -32,9 +37,6 @@ pip3.6 install pymysql
 
 
 ### Dependency for tests:
-
-
-[Attention] Now the source codes are for developer, which includes many dependeces such as MySQL, IPE, RocksDB, IPE, SRE, and so on. We will summarize the dependency requirements and provide simplified usages before July 4, 2023.
 
 
 See the README.md in each test's folder:
