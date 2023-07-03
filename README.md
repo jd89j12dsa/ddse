@@ -61,7 +61,7 @@ See the README.md in each test's folder:
 [Comparision from ShieldDB](Compare_ShieldDB/README.md)
 
 
-[Query recover rate of d-DSE, Seal, and ShieldDB](Compare_ShieldDB/README.md)
+[Query recover rate of d-DSE, Seal, and ShieldDB](BVA-BVMA-DDSE_ShielDB_Seal/README.md)
 
 
 
@@ -92,7 +92,7 @@ In detail, please see the instruction part of README.md in each tests:
 [Comparision from ShieldDB](Compare_ShieldDB/README.md)
 
 
-[Query recover rate of d-DSE, Seal, and ShieldDB](Compare_ShieldDB/README.md)
+[Query recover rate of d-DSE, Seal, and ShieldDB](BVA-BVMA-DDSE_ShielDB_Seal/README.md)
 
 
 ## Contributing
