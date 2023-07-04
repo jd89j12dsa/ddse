@@ -47,7 +47,7 @@ Most codes provide shell commands in our test like:
 
 ```sh test_XXX.sh```
 
-In detail, please see the dependency and useage instruction parts in each tests:
+In detail, please see the dependency and useage instruction parts in each test folder:
 
 [Heuristic from MITRA](Scheme_MITRAPP/README.md)
 
