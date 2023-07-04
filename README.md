@@ -1,7 +1,7 @@
 # d-DSE
 
-Welcome to d-DSE (Distinct Dynamic Symmetirc Encryption) project, an ongoing project that aims to secure distinct search. 
-We release our test code for secutiy projects in continue.
+Welcome to d-DSE (Distinct Dynamic Symmetirc Encryption), an ongoing program that aims to secure distinct search in EDB. 
+We release our test code for future securtiy programs on EDB systems.
 
 
 ## Attention
@@ -9,7 +9,7 @@ We release our test code for secutiy projects in continue.
 Now the source codes are for developer, which includes many dependeces such as MySQL, IPE, RocksDB, IPE, SRE, and so on. We will summarize the dependency requirements and provide simplified usages before July 4, 2023.
 
 
-## Experimental Evaluation
+## How to Run
 ### Environment
 
 Our experimental system is Ubuntu Server 16.04 x64
@@ -40,6 +40,17 @@ The python version is v3.6.0
 
 ### Datasets:
 
+In DB_Gen folder, we provide the Crimes, VAERS, and Wikipedia datasets dumped from MongoDB.
+
+To restore dumped dataset in MongoDB:
+
+```
+cd ./DB_Gen
+mongorestore --db DDSECrimeC ./
+mongorestore --db DDSE2022VAERSVAXC ./
+mongorestore --db DSEWikiC ./
+```
+
 
 ### Tests:
 
@@ -47,7 +58,7 @@ Most codes provide shell commands in our test like:
 
 ```sh test_XXX.sh```
 
-In detail, please see the dependency and useage instruction parts in each test folder:
+In detail, please see the dependency and useage instruction parts for each test:
 
 [MITRA*](Scheme_MITRAPP/README.md)
 
