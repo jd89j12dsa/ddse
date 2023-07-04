@@ -119,14 +119,17 @@ def Ciphertext_Gen_Phase():
 			sector += 1000
 			result.append('len:\t'+str(entry_counter) +'\t'+ str(total_encrypt_time)+'\n')
 			if len(result) > 100:
-				print('wirtedata')
-				write_result("DDSE2Add",test_group,result,0)
+				# print('wirtedata')
+				# write_result("DDSE2Add",test_group,result,0)
 				result = []
 		upload_list.extend(Keywords_Cipher)
 		if len(upload_list)>= 20000:
-			print("start slice")
+			# print("start slice")
 			write_cipher_to_db(upload_list)
 			upload_list = []
+
+	print('Average Update time cost: ',total_encrypt_time/entry_counter)
+	print('Wait to write into database')
 
 	if len(upload_list)> 0:
 		write_cipher_to_db(upload_list)
@@ -135,10 +138,9 @@ def Ciphertext_Gen_Phase():
 			Keywords_Cipher_Collection[hash(data[0])] = data[1]
 		"""
 		upload_list = []
-	if len(result) > 0:
-		write_result("DDSE2Add",test_group,result,0)	
-
-	return 
+	# if len(result) > 0:
+		# write_result("DDSE2Add",test_group,result,0)	
+	return
 
 def write_result(result_string,test_group,data,del_total):
 	resultpath = "./ResultP"+ '/' + result_string + '/' + test_db_name + '/d' + str(del_total) + '/'
@@ -181,13 +183,13 @@ def deletion_phase_with_search(l_del_num,l_del_rate):
 					upload_list = []
 	
 				result.append('len:\t'+str(entry_counter) +'\t'+ str(total_encrypt_time)+'\n')
-				if len(result) > 0:
+				# if len(result) > 0:
 	
-					if process_dec_num == 0:
-						write_result("DDSE2Del",test_group,result,l_del_num*j)
+				# 	if process_dec_num == 0:
+				# 		write_result("DDSE2Del",test_group,result,l_del_num*j)
 	
-					else:
-						write_result("DDSE2Del"+str(process_dec_num)+"P",test_group,result,l_del_num*j)
+				# 	else:
+				# 		write_result("DDSE2Del"+str(process_dec_num)+"P",test_group,result,l_del_num*j)
 	
 				#pdb.set_trace()
 				Search_Phase(l_del_num,j)
@@ -209,7 +211,7 @@ def deletion_phase_with_search(l_del_num,l_del_rate):
 				upload_list.extend(Keywords_Cipher)
 	
 				if len(upload_list)>= 200000:
-					print("start slice")
+					# print("start slice")
 					t=threading.Thread(target=write_cipher_to_db,args=(upload_list[:]))
 					p.append(t)
 					t.start()
@@ -323,9 +325,15 @@ def Search(keyword):
 	time_server = time_e-time_s
 	#if keyword not in EDB_cache:
 	Client_bytes = getsize(k2)+getsize(kc)+getsize(sk)+getsize(skR)+sre.getbloomfiltersize(keyword)
-	Server_bytes = getsize(output)
+	Server_bytes = getoutputsize(output)
 	return time_server,time_user, output, Client_bytes, Server_bytes
 
+def getoutputsize(output):
+	size = 0
+	for i in output:
+		if i is not None:
+			size+= getsize(i)
+	return size
 
 def Search_Phase(l_del_num,l_del_rate):
 	global mydb,ownerkey,mydb,plaintextdb
@@ -347,6 +355,8 @@ def Search_Phase(l_del_num,l_del_rate):
 		plaintext_cur = search_col.find(no_cursor_timeout=True).batch_size(1000)
 		task_search = [x["k"] for x in plaintext_cur]
 
+	task_search = task_search[0:1]
+
 	for keyword in task_search:
 		time_server,time_user, S, Client_bytes, Server_bytes = Search(keyword)
 
@@ -356,8 +366,9 @@ def Search_Phase(l_del_num,l_del_rate):
 		Client_bytes_len[keyword] = Client_bytes
 		Server_bytes_len[keyword] = Server_bytes
 
-	print(l_del_num*l_del_rate,"success")
-	write_search_time(test_group,Search_time,total_time, result_len,Client_bytes_len,Server_bytes_len,l_del_num*l_del_rate)
+	print('Rep. Kword result-\t', "Search_time: ", str(Search_time[task_search[0]]), '\tComm. cost: ', str(Server_bytes_len[task_search[0]]/1024) + 'KB' + '\n') 
+	# print(l_del_num*l_del_rate,"success")
+	# write_search_time(test_group,Search_time,total_time, result_len,Client_bytes_len,Server_bytes_len,l_del_num*l_del_rate)
 
 def write_search_time(test_group, Search_time, total_time, result_len,Client_bytes_len,Server_bytes_len,del_total):
 	resultpath = "./ResultP"+ '/' + "DDSE2Srch" + '/' + test_db_name + '/d' + str(del_total) + '/'
@@ -372,8 +383,8 @@ def write_search_time(test_group, Search_time, total_time, result_len,Client_byt
 
 def Test():
 	l = list(test_phase)
-	print ('*********************************************')
-	print ('start test_group', test_group)
+	print ('-----------Test BF-SRE-P-----------')
+	print ('test_group: ', test_group, 'test_db_name: ', test_db_name, 'del_num: ', del_num, 'processors_num: ', process_dec_num, 'falut_tolrance: ', falut_to)
 	print('start initial db')
 	DB_Setup(test_db_name,data_scale,falut_to)
 	Ciphertext_Gen_Phase()
