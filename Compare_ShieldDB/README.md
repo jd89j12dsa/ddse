@@ -9,7 +9,7 @@ Install ShieldDB, see more on [ShieldDB](https://github.com/MonashCybersecurityL
 
 ```git clone https://github.com/MonashCybersecurityLab/ShieldDB.git```
 
-NOTE: 
+NOTE: The RocksDB version mentioned in the original is out of date, please use RocksDB v6.22.1 and the corresponding gflags.
 
 ## Usage Instructions
 
