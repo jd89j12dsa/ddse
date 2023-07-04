@@ -1,6 +1,6 @@
 ### Query recovery of d-DSE, Seal, and ShielDB
 
-We forked the code for testing query recovery rate in [USENIX23](https://github.com/Kskfte/BVA-BVMA)
+We forked the code for testing query recovery rate in [USENIX23](https://github.com/Kskfte/BVA-BVMA).
 The Wikipedia dataset is decoded by ```leak. py```, and we conducted tests on d-DSE, Seal, and ShieldDB, respectively. 
 
 ## Dependency
