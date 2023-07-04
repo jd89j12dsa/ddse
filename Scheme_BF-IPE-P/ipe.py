@@ -1,10 +1,32 @@
-import sys, os, math
+"""
+Copyright (c) 2016, Kevin Lewi
+ 
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+"""
+
+"""
+Implementation of function-hiding inner product encryption (FHIPE).
+"""
+
+import sys, os, math, pdb
 
 # Path hack
-sys.path.insert(0, os.path.abspath('charm'))
-sys.path.insert(1, os.path.abspath('../charm'))
+sys.path.append(os.path.abspath('charm'))
+sys.path.append(os.path.abspath('../charm'))
 
 from charm.toolbox.pairinggroup import PairingGroup,ZR,G1,G2,GT,pair
+from charm.core.engine.util import objectToBytes,bytesToObject
+
 from subprocess import call, Popen, PIPE
 
 def setup(n, group_name = 'MNT159', simulated = False):
@@ -48,7 +70,7 @@ def setup(n, group_name = 'MNT159', simulated = False):
   B = parse_matrix(B_str, group)
   Bstar = parse_matrix(Bstar_str, group)
 
-  pp = ()
+  pp = (group,)
   sk = (detB, B, Bstar, group, g1, g2)
   return (pp, sk)
 
@@ -71,7 +93,7 @@ def keygen(sk, x): # x is a list for vector
   for i in range(n):
     k1[i] = g1 ** k1[i]
   
-  return (k1,)
+  return objectToBytes(k1 , group)
   
 def encrypt(sk, x):
   """
@@ -92,7 +114,9 @@ def encrypt(sk, x):
   for i in range(n):
     c1[i] = g2 ** c1[i]
 
-  return (c1,)
+  #pdb.set_trace()
+
+  return objectToBytes(c1 , group)
 
 def decrypt(pp, skx, cty, max_innerprod = 100):
   """
@@ -100,14 +124,14 @@ def decrypt(pp, skx, cty, max_innerprod = 100):
   The output is the inner product <x,y>, so long as it is in the range 
   [0,max_innerprod].
   """
-
-  (k1,) = skx
-  (c1,) = cty
+  (group,) = pp
+  k1 = bytesToObject(skx, group)
+  c1 = bytesToObject(cty, group)
 
   t1 = innerprod_pair(c1, k1)
   #t2 = pair(c2, k2)
   
-  return t1
+  return objectToBytes(t1, group)
 
 def parse_matrix(matrix_str, group):
   """
