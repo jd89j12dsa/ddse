@@ -16,7 +16,7 @@ sudo python3.6 setup_Diana.py install
 pip3.6 install pathos
 ```
 
-3. Install optimized FH-IPE module. 
+3. Install optimized FH-IPE module:
 
   a. Fork the FH-IPE in current folder, please see more information about [FH-IPE](https://github.com/kevinlewi/fhipe.git) installation.
 
