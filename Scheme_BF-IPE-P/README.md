@@ -23,7 +23,8 @@ pip3.6 install pathos
 git clone --recursive https://github.com/kevinlewi/fhipe.git
 cd fhipe
 sudo make install
-``` 
+```
+
 	b. Replace the original ipe.py with the optmized version
 
 ```
