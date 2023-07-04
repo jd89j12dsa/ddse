@@ -4,11 +4,6 @@ Welcome to d-DSE (Distinct Dynamic Searchable Symmetirc Encryption), an ongoing 
 We release our test code for future securtiy programs on EDB systems.
 
 
-## Attention
-
-Now the source codes are for developer, which includes many dependeces such as MySQL, IPE, RocksDB, IPE, SRE, and so on. We will summarize the dependency requirements and provide simplified usages before July 4, 2023.
-
-
 ## How to Run
 ### Environment
 
