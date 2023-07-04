@@ -25,6 +25,7 @@ class Attack:
         self.target_queries = target_queries
         self.observed_queries = observed_queries
         self.trend_matrix_norm = trend_matrix_norm
+        self.real_size_max = 100000
   
         self.real_size, self.real_length = real_size, real_length
 
@@ -157,6 +158,7 @@ class Attack:
                     self.recover_queries_num += 1
                 self.total_queries_num += 1
     def BVA_inject(self, real_size_after_injection):
+        t_real_size_max = self.real_size_max
         kws_each_doc = math.ceil(((int) (len(self.chosen_kws)*self.kws_leak_percent))/2)
         if kws_each_doc==0:
             num_injection_doc=0
@@ -179,7 +181,7 @@ class Attack:
 
 
         for kws_ind in real_size_after_injection:
-            t_real_size_max = max(real_size_after_injection[kws_ind],real_size_max)
+            t_real_size_max = max(real_size_after_injection[kws_ind],t_real_size_max)
 
         for kws_ind in range((int) (len(self.chosen_kws)*self.kws_leak_percent)):
             for num_ind in range(num_injection_doc):

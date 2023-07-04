@@ -4,8 +4,8 @@ import pickle
 import random
 import utils
 from multiprocessing import Pool
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
+# import matplotlib.pyplot as plt
+# import matplotlib.ticker as ticker
 from functools import partial
 from tqdm import tqdm
 import attacks
@@ -36,101 +36,101 @@ def multiprocess_worker(chosen_kws, real_size, real_length, offset_of_Decoding, 
     return [Decoding_accuracy, Decoding_injection_length, Decoding_injection_size,
             BVA_accuracy, BVA_injection_length, BVA_injection_size]
 
-def plot_figure(dataset_name):
-    with open(utils.RESULT_PATH + '/' + 'BVAWithGamma{}.pkl'.format(dataset_name), 'rb') as f:
-        (BVA_gamma_list, Decoding_accuracy, Decoding_injection_size, BVA_accuracy, BVA_injection_size) = pickle.load(f)
-        f.close()
-    # plt.rcParams.update({
-    # "legend.fancybox": False,
-    # "legend.frameon": True,
-    # "text.usetex": True,
-    # "font.family": "serif",
-    # "font.serif": ["Times"], #注意这里是Times，不是Times New Roman
-    # "font.size":20})
-    _, ax = plt.subplots()      
-    ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))  
-    ax.ticklabel_format(style = 'sci',scilimits=(0,1), axis='x', useMathText=True)
-    plt.grid()
-    if dataset_name=='Enron':
-        wid = 15000
-        x_off = BVA_gamma_list.copy()
+# def plot_figure(dataset_name):
+#     with open(utils.RESULT_PATH + '/' + 'BVAWithGamma{}.pkl'.format(dataset_name), 'rb') as f:
+#         (BVA_gamma_list, Decoding_accuracy, Decoding_injection_size, BVA_accuracy, BVA_injection_size) = pickle.load(f)
+#         f.close()
+#     # plt.rcParams.update({
+#     # "legend.fancybox": False,
+#     # "legend.frameon": True,
+#     # "text.usetex": True,
+#     # "font.family": "serif",
+#     # "font.serif": ["Times"], #注意这里是Times，不是Times New Roman
+#     # "font.size":20})
+#     _, ax = plt.subplots()      
+#     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))  
+#     ax.ticklabel_format(style = 'sci',scilimits=(0,1), axis='x', useMathText=True)
+#     plt.grid()
+#     if dataset_name=='Enron':
+#         wid = 15000
+#         x_off = BVA_gamma_list.copy()
 
-        ax.bar(x_off[:len(x_off)-2]+[x_off[len(x_off)-1]], BVA_injection_size[:len(BVA_injection_size)-2]+[BVA_injection_size[len(BVA_injection_size)-1]], width=wid, label='BVA-ISize', color = 'green', edgecolor = "white", hatch = '/')
-        ax.bar(x_off[len(x_off)-1] + wid , Decoding_injection_size, width=wid, label='Decoding-ISize', color = 'blue', edgecolor = "white", hatch = '\\')
-        ax.set_xlabel(r'$\gamma$')
-        ax.set_ylabel('Injection size')
-        ax.set_yscale('log')
-        ax.tick_params()
-        ax.legend(loc = 'center')
+#         ax.bar(x_off[:len(x_off)-2]+[x_off[len(x_off)-1]], BVA_injection_size[:len(BVA_injection_size)-2]+[BVA_injection_size[len(BVA_injection_size)-1]], width=wid, label='BVA-ISize', color = 'green', edgecolor = "white", hatch = '/')
+#         ax.bar(x_off[len(x_off)-1] + wid , Decoding_injection_size, width=wid, label='Decoding-ISize', color = 'blue', edgecolor = "white", hatch = '\\')
+#         ax.set_xlabel(r'$\gamma$')
+#         ax.set_ylabel('Injection size')
+#         ax.set_yscale('log')
+#         ax.tick_params()
+#         ax.legend(loc = 'center')
 
-        ax2 = ax.twinx()
-        ax2.plot(x_off[:len(x_off)-2]+[x_off[len(x_off)-1]], BVA_accuracy[:len(BVA_injection_size)-2]+[BVA_accuracy[len(BVA_accuracy)-1]], 'lightgreen', marker = 'o', markersize=10, markeredgecolor = 'g', markeredgewidth=0.8, label = 'BVA-Rer')
-        ax2.scatter(x_off[len(x_off)-1]+wid, Decoding_accuracy, c = 'r', marker = 'x', s=70, label = 'Decoding-Rer')
-        ax2.annotate('($\#$W/2, {:.2f})'.format(BVA_accuracy[0]),
-        xy=(x_off[0], BVA_accuracy[0]),
-        xytext=(x_off[0]-0.01, BVA_accuracy[0]-0.04), color = 'black', 
-        arrowprops=dict(arrowstyle="->"))
-        ax2.annotate('(offset, {:.2f})'.format(BVA_accuracy[len(BVA_accuracy)-1]),
-        xy=(x_off[len(x_off)-1], BVA_accuracy[len(BVA_accuracy)-1]),
-        xytext=(x_off[len(x_off)-1]+.025, BVA_accuracy[len(BVA_accuracy)-1]+.015), color = 'black', 
-        arrowprops=dict(arrowstyle="->"))
-        ax2.set_ylabel('Recovery rate')
-        ax2.tick_params()
-        ax2.legend(loc = 'upper center', bbox_to_anchor = (0.5,0.9))
-    elif dataset_name=='Lucene':
-        wid = 45000
-        x_off = BVA_gamma_list.copy()
+#         ax2 = ax.twinx()
+#         ax2.plot(x_off[:len(x_off)-2]+[x_off[len(x_off)-1]], BVA_accuracy[:len(BVA_injection_size)-2]+[BVA_accuracy[len(BVA_accuracy)-1]], 'lightgreen', marker = 'o', markersize=10, markeredgecolor = 'g', markeredgewidth=0.8, label = 'BVA-Rer')
+#         ax2.scatter(x_off[len(x_off)-1]+wid, Decoding_accuracy, c = 'r', marker = 'x', s=70, label = 'Decoding-Rer')
+#         ax2.annotate('($\#$W/2, {:.2f})'.format(BVA_accuracy[0]),
+#         xy=(x_off[0], BVA_accuracy[0]),
+#         xytext=(x_off[0]-0.01, BVA_accuracy[0]-0.04), color = 'black', 
+#         arrowprops=dict(arrowstyle="->"))
+#         ax2.annotate('(offset, {:.2f})'.format(BVA_accuracy[len(BVA_accuracy)-1]),
+#         xy=(x_off[len(x_off)-1], BVA_accuracy[len(BVA_accuracy)-1]),
+#         xytext=(x_off[len(x_off)-1]+.025, BVA_accuracy[len(BVA_accuracy)-1]+.015), color = 'black', 
+#         arrowprops=dict(arrowstyle="->"))
+#         ax2.set_ylabel('Recovery rate')
+#         ax2.tick_params()
+#         ax2.legend(loc = 'upper center', bbox_to_anchor = (0.5,0.9))
+#     elif dataset_name=='Lucene':
+#         wid = 45000
+#         x_off = BVA_gamma_list.copy()
 
-        ax.bar(x_off, BVA_injection_size, width=wid, label='BVA-ISize', color = 'green', edgecolor = "white", hatch = '/')
-        ax.bar(x_off[len(x_off)-1] + wid, Decoding_injection_size, width=wid, label='Decoding-ISize', color = 'b', edgecolor = "white", hatch = '\\')
-        ax.set_xlabel(r'$\gamma$')
-        ax.set_ylabel('Injection size')
-        ax.set_yscale('log')
-        ax.tick_params()
-        ax.legend(loc = 'center')
+#         ax.bar(x_off, BVA_injection_size, width=wid, label='BVA-ISize', color = 'green', edgecolor = "white", hatch = '/')
+#         ax.bar(x_off[len(x_off)-1] + wid, Decoding_injection_size, width=wid, label='Decoding-ISize', color = 'b', edgecolor = "white", hatch = '\\')
+#         ax.set_xlabel(r'$\gamma$')
+#         ax.set_ylabel('Injection size')
+#         ax.set_yscale('log')
+#         ax.tick_params()
+#         ax.legend(loc = 'center')
 
-        ax2 = ax.twinx()
-        ax2.plot(x_off, BVA_accuracy, 'lightgreen', marker = 'o', markersize=10, markeredgecolor = 'g', markeredgewidth=0.8, label = 'BVA-Rer')
-        ax2.scatter(x_off[len(x_off)-1]+wid, Decoding_accuracy, c = 'r', marker = 'x', s=70, label = 'Decoding-Rer')
-        ax2.annotate('($\#$W/2, {:.2f})'.format(BVA_accuracy[0]),
-        xy=(x_off[0], BVA_accuracy[0]),
-        xytext=(x_off[0]-0.01, BVA_accuracy[0]-0.037), color = 'black', 
-        arrowprops=dict(arrowstyle="->"))
-        ax2.annotate('(offset, {:.2f})'.format(BVA_accuracy[len(BVA_accuracy)-1]),
-        xy=(x_off[len(x_off)-1], BVA_accuracy[len(BVA_accuracy)-1]),
-        xytext=(x_off[len(x_off)-1]+0.025, BVA_accuracy[len(BVA_accuracy)-1]+.015), color = 'black', 
-        arrowprops=dict(arrowstyle="->"))
-        ax2.set_ylabel('Recovery rate')
-        ax2.legend(loc = 'upper center', bbox_to_anchor = (0.5,0.9))
-    else:
-        wid = 700000
-        x_off = BVA_gamma_list.copy()
+#         ax2 = ax.twinx()
+#         ax2.plot(x_off, BVA_accuracy, 'lightgreen', marker = 'o', markersize=10, markeredgecolor = 'g', markeredgewidth=0.8, label = 'BVA-Rer')
+#         ax2.scatter(x_off[len(x_off)-1]+wid, Decoding_accuracy, c = 'r', marker = 'x', s=70, label = 'Decoding-Rer')
+#         ax2.annotate('($\#$W/2, {:.2f})'.format(BVA_accuracy[0]),
+#         xy=(x_off[0], BVA_accuracy[0]),
+#         xytext=(x_off[0]-0.01, BVA_accuracy[0]-0.037), color = 'black', 
+#         arrowprops=dict(arrowstyle="->"))
+#         ax2.annotate('(offset, {:.2f})'.format(BVA_accuracy[len(BVA_accuracy)-1]),
+#         xy=(x_off[len(x_off)-1], BVA_accuracy[len(BVA_accuracy)-1]),
+#         xytext=(x_off[len(x_off)-1]+0.025, BVA_accuracy[len(BVA_accuracy)-1]+.015), color = 'black', 
+#         arrowprops=dict(arrowstyle="->"))
+#         ax2.set_ylabel('Recovery rate')
+#         ax2.legend(loc = 'upper center', bbox_to_anchor = (0.5,0.9))
+#     else:
+#         wid = 700000
+#         x_off = BVA_gamma_list.copy()
 
-        ax.bar(x_off, BVA_injection_size, width=wid, label='BVA-ISize', color = 'g', edgecolor = "white", hatch = '/')
-        ax.bar(x_off[len(BVA_gamma_list)-1] + wid, Decoding_injection_size, width=wid, label='Decoding-ISize', color = 'b', edgecolor = "white", hatch = '\\')
-        ax.set_xlabel(r'$\gamma$')
-        ax.set_ylabel('Injection size')
-        ax.set_yscale('log')
-        ax.tick_params()
-        ax.legend(loc = 'center')
+#         ax.bar(x_off, BVA_injection_size, width=wid, label='BVA-ISize', color = 'g', edgecolor = "white", hatch = '/')
+#         ax.bar(x_off[len(BVA_gamma_list)-1] + wid, Decoding_injection_size, width=wid, label='Decoding-ISize', color = 'b', edgecolor = "white", hatch = '\\')
+#         ax.set_xlabel(r'$\gamma$')
+#         ax.set_ylabel('Injection size')
+#         ax.set_yscale('log')
+#         ax.tick_params()
+#         ax.legend(loc = 'center')
 
-        ax2 = ax.twinx()
-        ax2.plot(x_off, BVA_accuracy, 'lightgreen', marker = 'o', markersize=10, markeredgecolor = 'g', markeredgewidth=0.8, label = 'BVA-Rer')
-        ax2.scatter(x_off[len(x_off)-1]+wid, Decoding_accuracy, c = 'r', marker = 'x', s=70, label = 'Decoding-Rer')   
-        ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
-        ax2.annotate('($\#$W/2, {:.2f})'.format(BVA_accuracy[0]),
-        xy=(x_off[0], BVA_accuracy[0]),
-        xytext=(x_off[0]-0.01, BVA_accuracy[0]-0.06), color = 'black', 
-        arrowprops=dict(arrowstyle="->"))
-        ax2.annotate('(offset, {:.2f})'.format(BVA_accuracy[len(BVA_accuracy)-1]),
-        xy=(x_off[len(x_off)-1], BVA_accuracy[len(BVA_accuracy)-1]),
-        xytext=(x_off[len(x_off)-1]+0.005, BVA_accuracy[len(BVA_accuracy)-1]+0.03), color = 'black', 
-        arrowprops=dict(arrowstyle="->"))
-        ax2.set_ylabel('Recovery rate')
-        ax2.legend(loc = 'upper center', bbox_to_anchor = (0.5,0.9))
-    plt.tight_layout()
-    plt.savefig(utils.PLOTS_PATH+'/'+'Offset{}.pdf'.format(dataset_name), bbox_inches = 'tight', dpi = 600)
-    plt.show()
+#         ax2 = ax.twinx()
+#         ax2.plot(x_off, BVA_accuracy, 'lightgreen', marker = 'o', markersize=10, markeredgecolor = 'g', markeredgewidth=0.8, label = 'BVA-Rer')
+#         ax2.scatter(x_off[len(x_off)-1]+wid, Decoding_accuracy, c = 'r', marker = 'x', s=70, label = 'Decoding-Rer')   
+#         ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
+#         ax2.annotate('($\#$W/2, {:.2f})'.format(BVA_accuracy[0]),
+#         xy=(x_off[0], BVA_accuracy[0]),
+#         xytext=(x_off[0]-0.01, BVA_accuracy[0]-0.06), color = 'black', 
+#         arrowprops=dict(arrowstyle="->"))
+#         ax2.annotate('(offset, {:.2f})'.format(BVA_accuracy[len(BVA_accuracy)-1]),
+#         xy=(x_off[len(x_off)-1], BVA_accuracy[len(BVA_accuracy)-1]),
+#         xytext=(x_off[len(x_off)-1]+0.005, BVA_accuracy[len(BVA_accuracy)-1]+0.03), color = 'black', 
+#         arrowprops=dict(arrowstyle="->"))
+#         ax2.set_ylabel('Recovery rate')
+#         ax2.legend(loc = 'upper center', bbox_to_anchor = (0.5,0.9))
+#     plt.tight_layout()
+#     plt.savefig(utils.PLOTS_PATH+'/'+'Offset{}.pdf'.format(dataset_name), bbox_inches = 'tight', dpi = 600)
+#     plt.show()
 
 if __name__ == '__main__':
     
@@ -139,7 +139,7 @@ if __name__ == '__main__':
     if not os.path.exists(utils.PLOTS_PATH):
         os.makedirs(utils.PLOTS_PATH)
     """ choose dataset """
-    d_id = input("input evaluation dataset: 1. Enron 2. Lucene 3.WikiPedia ")
+    d_id = '3'
     dataset_name = ''
     number_queries_per_period = 1000
     observed_period = 8
@@ -167,7 +167,6 @@ if __name__ == '__main__':
         real_size, real_length, offset_of_Decoding = pickle.load(f) # wo an zhao dis length lai pao
         #pdb.set_trace()
         f.close()
-    print(offset_of_Decoding)
     # edit #
     #_, trend_matrix, _ = utils.generate_keyword_trend_matrix(kw_dict, len(kw_dict), 260, adv_observed_offset)
     trend_matrix = []
@@ -190,6 +189,8 @@ if __name__ == '__main__':
     BVA_injection_length = [0]*len(BVA_gamma_list)
     BVA_injection_size = [0]*len(BVA_gamma_list)
     
+    print('-----------Test d-DSE Query Recovery Rate-----------')
+
     pbar = tqdm(total=len(BVA_gamma_list))
     for ind2 in range(len(BVA_gamma_list)):    
         # chosen_kws: [a,b,c....] real_size: fan hui de chang du real_length: fan hui de changdu {"key":resoponse length} offset_of_Decoding 1
@@ -218,17 +219,17 @@ if __name__ == '__main__':
     Decoding_injection_length /= exp_times
     Decoding_injection_size /= exp_times
   
-    print("Decoding_accuracy:{}".format(Decoding_accuracy))
-    print("Decoding_injection_size:{}".format(Decoding_injection_size))
-    print("BVA_accuracy:{}".format(BVA_accuracy))
+    # print("Decoding_accuracy:{}".format(Decoding_accuracy))
+    # print("Decoding_injection_size:{}".format(Decoding_injection_size))
+    print("BVA_accuracy_on_d-DSE:{}".format(BVA_accuracy))
     print("BVA_injection_size:{}".format(BVA_injection_size))
     
     """ save result """
-    with open(utils.RESULT_PATH + '/' + 'BVAWithGamma{}.pkl'.format(dataset_name), 'wb') as f:
-        pickle.dump((BVA_gamma_list, Decoding_accuracy, Decoding_injection_size, BVA_accuracy, BVA_injection_size), f)
-        f.close()
+    # with open(utils.RESULT_PATH + '/' + 'BVAWithGamma{}.pkl'.format(dataset_name), 'wb') as f:
+        # pickle.dump((BVA_gamma_list, Decoding_accuracy, Decoding_injection_size, BVA_accuracy, BVA_injection_size), f)
+        # f.close()
 
     """ plot figure """
-    plot_figure(dataset_name)
+    #plot_figure(dataset_name)
     
 
