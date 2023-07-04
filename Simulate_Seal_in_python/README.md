@@ -1,4 +1,4 @@
-### Comparsion from Seal in python
+### Comparsion with Seal in python
 
 
 ## Dependency
