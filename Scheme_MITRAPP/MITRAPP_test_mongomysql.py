@@ -262,7 +262,7 @@ def Search_Phase():
 		time_e = time.time()
 		#print(search_result)
 		result_len[keyword] = len(search_result)
-		match_len[keyword] = sum([sys.getsizeof(rei) for rei in re]) 
+		match_len[keyword] = get_size(re) 
 		Search_time[keyword] = time_e-time_s
 	write_search_time(test_group,latency,Search_time, match_len,result_len)
 
