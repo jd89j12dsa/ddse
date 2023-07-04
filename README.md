@@ -49,7 +49,7 @@ Most codes provide shell commands in our test like:
 
 In detail, please see the dependency and useage instruction parts in each test folder:
 
-[Heuristic from MITRA](Scheme_MITRAPP/README.md)
+[MITRA*](Scheme_MITRAPP/README.md)
 
 
 [BF-IPE](Scheme_BF-IPE-P/README.md)
@@ -58,10 +58,10 @@ In detail, please see the dependency and useage instruction parts in each test f
 [BF-SRE](Scheme_BF-SRE/README.md)
 
 
-[Comparison from Seal](Simulate_Seal_in_python/README.md)
+[Comparision with Seal](Simulate_Seal_in_python/README.md)
 
 
-[Comparision from ShieldDB](Compare_ShieldDB/README.md)
+[Comparision with ShieldDB](Compare_ShieldDB/README.md)
 
 
 [Query recover rate of d-DSE, Seal, and ShieldDB](BVA-BVMA-DDSE_ShielDB_Seal/README.md)
