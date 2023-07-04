@@ -1,4 +1,4 @@
-### Support ShieldDB
+### Comparision with ShieldDB
 
 This code converts our dataset into raw data that can be used on ShieldDB. 
 Before the test, it is necessary to copy generated configuration files into the corresponding folders in ShieldDB.
