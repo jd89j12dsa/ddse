@@ -1,7 +1,7 @@
 ### Support ShieldDB
 
 This code converts our dataset into raw data that can be used on ShieldDB. 
-After generation, it is necessary to copy the configuration file  of ShieldDB to the corresponding folders.
+Before the test, it is necessary to copy generated configuration files into the corresponding folders in ShieldDB.
 
 ## Dependency
 
