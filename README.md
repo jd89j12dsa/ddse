@@ -15,9 +15,7 @@ Our experimental system is Ubuntu Server 16.04 x64
 
 The python version is v3.6.0
 
-## Dependency
-
-### Install Basic Dependency
+## Install Basic Dependency
 
 1. Install <u>MongoDB</u> to provide datasets for various tests 
 
@@ -39,43 +37,16 @@ The python version is v3.6.0
 
 ```sudo apt-get install libssl-dev```
 
-
-### Dependency for tests:
-
-
-See the README.md in each test's folder:
+## Datasets:
 
 
-[Heuristic from MITRA](Scheme_MITRAPP/README.md)
-
-
-[BF-IPE](Scheme_BF-IPE-P/README.md)
-
-
-[BF-SRE](Scheme_BF-SRE/README.md)
-
-
-[Comparison from Seal](Simulate_Seal_in_python/README.md)
-
-
-[Comparision from ShieldDB](Compare_ShieldDB/README.md)
-
-
-[Query recover rate of d-DSE, Seal, and ShieldDB](BVA-BVMA-DDSE_ShielDB_Seal/README.md)
-
-
-
-## Usage Instructions
-
+## Tests:
 
 Most codes provide shell commands in our test like:
 
-
 ```sh test_XXX.sh```
 
-
-In detail, please see the instruction part of README.md in each tests:
-
+In detail, please see the dependency and useage instruction parts in each tests:
 
 [Heuristic from MITRA](Scheme_MITRAPP/README.md)
 
