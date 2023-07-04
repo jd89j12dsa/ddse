@@ -13,7 +13,7 @@ sudo python3.6 setup_DianaM.py install
 ## Usage Instructions
 
 
-We provide an exmaple for Mitra* on the Crimes dataset without deletion operations.
+We provide an exmaple for Mitra* on the VAERS dataset without deletion operations.
 
 To start the test, run the shell code in the current folder:
 
