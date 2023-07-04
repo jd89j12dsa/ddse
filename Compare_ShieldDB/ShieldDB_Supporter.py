@@ -9,7 +9,6 @@ import utilities
 import math
 import pymongo
 from collections import defaultdict
-ke_dict_length = defaultdict(int)
 def generate_graph(weights, a):
     graph = [[float('inf')] * len(weights) for _ in range(len(weights))]
     min_weight = float('inf')
@@ -20,7 +19,6 @@ def generate_graph(weights, a):
                 weight = abs(j - i) * weights[j]
                 min_weight = min (weight, min_weight)
                 graph[i][j] = weight
-    print("min_weight: ", min_weight)
     return graph,min_weight
 
 def generate_heuristic(weights,a,min_weight):
@@ -34,8 +32,6 @@ def generate_heuristic(weights,a,min_weight):
     max_heuristic = max(heuristic)*min_weight/2
 
     heuristic = [(i/max_heuristic) for i in heuristic]
-
-    print("max_heuristic: ", max(heuristic))
 
     return heuristic
 
@@ -117,21 +113,12 @@ def cluster_from_stp(nodelist, shortest_path):
             output_clusters_points.append(lastind)
             keyword_in_cluster_list.extend([ind+1 for _ in range(lastind,ind)])
             lastind = ind
-    
+
     wiki_wl_v_off_SampleDataOfShieldDB = []
     for i in cluster_keywords:
         wiki_wl_v_off_SampleDataOfShieldDB.extend(i)
 
-    cluster_keywords_dict = {}
-    for i in wiki_wl_v_off_SampleDataOfShieldDB:
-        cluster_keywords_dict[i]= {'count':ke_dict_length[i], 'trend': []}
-    
-    print (len(wiki_wl_v_off_SampleDataOfShieldDB))
-
-
-    utilities.dump_data_to_file(cluster_keywords_dict,'./Var/'+test_db_name,"wiki_kws_dict.pkl")
-    utilities.dump_data_to_file(wiki_wl_v_off_SampleDataOfShieldDB,'./Var/'+test_db_name,'wiki_wl_v_off_SampleDataOfShieldDB.pkl')
-
+    # utilities.dump_data_to_file(wiki_wl_v_off_SampleDataOfShieldDB,'./Var/'+test_db_name,'wiki_wl_v_off_SampleDataOfShieldDB.pkl')
 
     return cluster_keywords,cluster_keywords_occ,keyword_in_cluster_list,output_clusters_points[1:]
 
@@ -139,10 +126,8 @@ def cluster_from_stp(nodelist, shortest_path):
 def get_cluster_occ(cluster_keywords_occ):
 
     all_occ = sum(cluster_keywords_occ)
-    print("each cluster_capacity:", cluster_keywords_occ)
+    print("recommend thresshold: [", cluster_keywords_occ[0], cluster_keywords_occ[-1],"]")
     cluster_occ = [i/all_occ for i in cluster_keywords_occ]
-
-
 
     return cluster_occ
 
@@ -216,10 +201,6 @@ def process_anno(keyword_dict):
 
             same_filename_count_dict[No_filename] = max(same_filename_count_dict[No_filename], count)
 
-    for i in filename_dict:
-        file_Attack_doc.append(filename_dict[i])
-
-    utilities.dump_data_to_file(file_Attack_doc, './Var/'+test_db_name, 'wiki_doc.pkl')
 
     filenumber = 1
 
@@ -230,12 +211,13 @@ def process_anno(keyword_dict):
         for i in range(same_filename_count_dict[No_filename]):
 
             Writestream(filenumber,keyword)
+            file_Attack_doc.append(keyword)
 
             filename_value[filenumber] = No_filename
-            #file_Attack_doc.append(keyword)
 
             filenumber+=1
 
+    utilities.dump_data_to_file(file_Attack_doc,'./Var/'+test_db_name,'wiki_doc.pkl')
     utilities.dump_data_to_file(filename_value,'./Var/'+test_db_name, 'translate_dict')
 
 if __name__ == '__main__':
@@ -251,9 +233,6 @@ if __name__ == '__main__':
 
     for plaintext in plaintext_cur:
         plaintextdata[plaintext['k']] = plaintext['val_set']
-        ke_dict_length[plaintext['k']] = len(plaintext['val_set'])
-
-    print(len(plaintextdata))
 
     process_anno(plaintextdata)
 
