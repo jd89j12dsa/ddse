@@ -19,18 +19,18 @@ pip3.6 install pathos
 3. Install optimized FH-IPE module. 
 
 	a. Fork the FH-IPE in current folder, please see more information about [FH-IPE](https://github.com/kevinlewi/fhipe.git) installation.
-``` 
+``
 git clone --recursive https://github.com/kevinlewi/fhipe.git
 cd fhipe
 sudo make install
-```
+``
 
 	b. Replace the original ipe.py with the optmized version
 
-```
+``
 cd ..
 mv ./ipe.py ./fhipe/fhipe/
-```
+``
 
 ## Usage Instructions
 
