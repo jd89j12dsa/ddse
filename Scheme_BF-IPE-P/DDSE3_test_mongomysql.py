@@ -581,7 +581,6 @@ def Test():
 	l = list(test_phase)
 	print ('-----------Test BF-IPE-P-----------')
 	print ('test_group: ', test_group, 'test_db_name: ', test_db_name, 'del_num: ', del_num, 'processors_num: ', process_num, 'falut_tolrance: ', falut_to)
-
 	print('start initial db')
 	DB_Setup(test_db_name)
 	Ciphertext_Gen_Phase()
