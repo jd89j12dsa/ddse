@@ -1,6 +1,6 @@
 # d-DSE
 
-Welcome to d-DSE (Distinct Dynamic Symmetirc Encryption), an ongoing program that aims to secure distinct search in EDB. 
+Welcome to d-DSE (Distinct Dynamic Searchable Symmetirc Encryption), an ongoing program that aims to secure distinct search in EDB. 
 We release our test code for future securtiy programs on EDB systems.
 
 
