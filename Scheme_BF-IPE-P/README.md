@@ -26,7 +26,7 @@ cd fhipe
 sudo make install
 ```
 
-  b. Replace the original ipe.py with the optmized version
+  b. Replace the original ipe.py with the optimized version
 
 
 ```
