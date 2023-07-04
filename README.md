@@ -49,6 +49,7 @@ cd ./DB_Gen
 mongorestore --db DDSECrimeC ./
 mongorestore --db DDSE2022VAERSVAXC ./
 mongorestore --db DSEWikiC ./
+cd ../
 ```
 
 
