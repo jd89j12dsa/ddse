@@ -1,5 +1,5 @@
 #include "ORAM.hpp"
-#include "../utils/Utilities.h"
+#include "Utilities.h"
 #include <algorithm>
 #include <iomanip>
 #include <fstream>
