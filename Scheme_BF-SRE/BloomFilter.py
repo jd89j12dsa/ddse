@@ -1,20 +1,8 @@
-'''
-布隆过滤器，在大量的数据中，判断某个数据是否存在时经常使用，有非常高效的空间效率与查询效率
-缺点：存在一定的误判率
-n:数据规模 p:要求的误判率
-二进制数据位数 m=-n*lnp/(ln2)^2
-哈希函数个数 k=m/n*ln2
-'''
 import ctypes
 import math
 
 class BloomFilter():
     def __init__(self,n:int,p:float):
-        '''
-        :param n:数据规模
-        :param p:误判率
-        '''
-        #计算二进制数组规模与hash函数数量
         self.bitSize=int(-n*math.log(p)/math.pow(math.log(2),2))
         self.hashFuncSize=int(self.bitSize*math.log(2)/n)
         #self.hashFuncSize =5
@@ -24,11 +12,7 @@ class BloomFilter():
     def hashnum(self):
         return self.hashFuncSize
     def get_index_ij(self,value):
-        '''
-        :param value:存入的数据
-        '''
         self.valueCheck(value)
-        #哈希值的设置参考google布隆过滤器源码
         hash1=value.__hash__()
         hash2=self.unsigned_right_shitf(hash1,16)
         total_tag_index=[]
@@ -37,7 +21,7 @@ class BloomFilter():
             if combinedHash<0:
                 combinedHash=~combinedHash
             combinedHash=combinedHash%self.bitSize
-            index = int(combinedHash / 1)  # 位于第index个int元素
+            index = int(combinedHash / 1) 
             total_tag_index.append(index)
         return (total_tag_index, hash1)
 
