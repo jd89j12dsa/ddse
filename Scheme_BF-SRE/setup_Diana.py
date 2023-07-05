@@ -3,9 +3,9 @@ from distutils.core import setup, Extension
 MOD = 'Diana'
 setup(  name = MOD,
         version = '0.1',
-        description= 'LiuB22',
-        author = 'ldl',
-        author_email = 'ldlkancolle@outlook.com',
+        description= '',
+        author = '',
+        author_email = '',
         ext_modules = [Extension( MOD,
                                 sources = ['Diana_Core_for_DDSE.c'],
                                 extra_link_args = ['-lssl','-lcrypto'],
