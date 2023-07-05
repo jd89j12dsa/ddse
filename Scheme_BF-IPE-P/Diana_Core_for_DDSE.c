@@ -1,5 +1,4 @@
 //Create time 2019/11/14
-// Dongli Liu
 #include <Python.h>
 #include <stdio.h>
 #include <stdlib.h>
