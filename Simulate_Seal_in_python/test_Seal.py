@@ -74,7 +74,7 @@ def Search_phase():
 		ts = time.time()
 		result = seal.Search(keyword)
 		result_len[keyword] = len(result)
-		result_size[keyword] = len(result)*Maintain_Consistent_com_level_ShieldDB
+		result_size[keyword] = getsize(result)
 		wiki_wl_v_off[cnt] = len(result)
 		result = list(filter(lambda x: x != '-1', result))
 		result = list(set(result))
@@ -112,23 +112,6 @@ if __name__ == '__main__':
 
 	faulthandler.enable()
 	test_db_name = str(sys.argv[1])
-
-	# Since Seal did not specify the dummy ciphertext length, we set parameters to eliminate this impact between Seal and ShieldDB
-
-	Maintain_Consistent_com_level_ShieldDB = 0
-	
-	if test_db_name == 'ToyDDSECrime':
-		Maintain_Consistent_com_level_ShieldDB = 1
-
-	if test_db_name == 'DDSECrimeC':
-		Maintain_Consistent_com_level_ShieldDB = 49
-
-	if test_db_name == 'DSEWikiC':
-		Maintain_Consistent_com_level_ShieldDB = 8.21875
-
-	if test_db_name == 'DDSE2022VAERSVAXC':
-		Maintain_Consistent_com_level_ShieldDB = 65
-
 	test_group = str(sys.argv[2])
 	test_alpha = int(sys.argv[3])
 	test_axe = int(sys.argv[4])
