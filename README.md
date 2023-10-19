@@ -56,19 +56,19 @@ Most codes provide shell commands in our test like:
 
 In detail, please see the dependency and useage instruction parts for each test:
 
-[Mitra$^P$](Scheme_MITRAPP/README.md)
+[Mitra$^P$](Scheme_MITRAPP/)
 
 
-[Aura$^P$](Scheme_Aura/README.md)
+[Aura$^P$](Scheme_Aura/)
 
 
-[BF-SRE](Scheme_BF-SRE/README.md)
+[BF-SRE](Scheme_BF-SRE/)
 
 
-[Comparision with Seal](Simulate_Seal_in_python/README.md)
+[Comparision with Seal](Simulate_Seal_in_python/)
 
 
-[Comparision with ShieldDB](Compare_ShieldDB/README.md) 
+[Comparision with ShieldDB](Compare_ShieldDB/) 
 
 
 [Query recover rate of d-DSE, Seal, and ShieldDB](BVA-BVMA-DDSE_ShielDB_Seal/README.md)
