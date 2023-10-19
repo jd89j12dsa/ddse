@@ -5,7 +5,8 @@
 
 1.Install the python-C models for BF-SRE.
 
-```  
+```
+sudo python3.6 ./SRE/setup_cSRE.py install
 sudo python3.6 setup_DDSE2.py install
 sudo python3.6 setup_Diana.py install
 ```
