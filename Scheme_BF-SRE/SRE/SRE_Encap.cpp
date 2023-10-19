@@ -92,6 +92,8 @@ vector<int> SRE_Encap::Dec(DataKrev& sKrev, vector<DataPair> datas){
         // derive the key from search position and decrypt the id
         vector<string> ciphertext_list = data.ciphertext_list;
         for (int i = 0; i < min(search_pos.size(), ciphertext_list.size()); ++i) {
+
+	    //We fix the bug in original SRE source code
             if(keys[search_pos[i]] == nullptr) continue;
             uint8_t res[4];
             aes_decrypt((uint8_t *) (ciphertext_list[i].c_str() + AES_BLOCK_SIZE), ciphertext_list[i].size() - AES_BLOCK_SIZE,
@@ -108,7 +110,7 @@ vector<int> SRE_Encap::Dec(DataKrev& sKrev, vector<DataPair> datas){
     return res_list;
 }
 
-
+//our greedy opt.
 vector<int> SRE_Encap::Dec_Greed(DataKrev& sKrev, vector<DataPair> datas){
     keys.clear();
     vector<int> res_list;
