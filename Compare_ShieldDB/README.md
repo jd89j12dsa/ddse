@@ -5,7 +5,7 @@ Before the test, it is necessary to copy generated configuration files into the 
 
 ## Dependency
 
-Install ShieldDB, see more on [ShieldDB](https://github.com/MonashCybersecurityLab/ShieldDB).
+Install [ShieldDB](https://github.com/MonashCybersecurityLab/ShieldDB).
 
 ```git clone https://github.com/MonashCybersecurityLab/ShieldDB.git```
 
