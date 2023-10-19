@@ -71,9 +71,6 @@ In detail, please see the dependency and useage instruction parts for each test:
 [Comparision with ShieldDB](Compare_ShieldDB/) 
 
 
-[Query recover rate of d-DSE, Seal, and ShieldDB](BVA-BVMA-DDSE_ShielDB_Seal/README.md)
-
-
 ## License
 
 d-DSE is released under the [MIT License](./LICENSE).
