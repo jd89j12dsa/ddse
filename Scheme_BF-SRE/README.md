@@ -11,13 +11,7 @@ sudo python3.6 setup_DDSE2.py install
 sudo python3.6 setup_Diana.py install
 ```
 
-2. Install pathos module.
-
-```
-pip3.6 install pathos
-```
-
-3. Install Crypto module.
+2. Install Crypto module.
 
 ```
 pip3.6 install pycryptodome
