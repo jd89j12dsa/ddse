@@ -1,6 +1,6 @@
 ### Comparision with ShieldDB
 
-This code converts our dataset into raw data that can be used on ShieldDB. 
+The Q_plan.py converts our dataset into raw data with the subsequent streaming data that can be operated on ShieldDB. 
 Before the test, it is necessary to copy generated configuration files into the corresponding folders in ShieldDB.
 
 ## Dependency
@@ -16,7 +16,7 @@ NOTE: The RocksDB version mentioned in the original is out of date, please use R
 1. move these files into ShieldDB, and make the "Var" folder:
 
 ```
-mv ./ShieldDB_Supporter.py ./ShieldDB/
+mv ./Q_plan.py ./ShieldDB/
 mv ./Gen.sh ./ShieldDB/
 cd ./ShieldDB/
 mkdir ./Var/
