@@ -1,6 +1,6 @@
 # d-DSE
 
-Welcome to d-DSE (Distinct Dynamic Searchable Symmetirc Encryption), an ongoing program that aims to secure distinct search in EDB. 
+d-DSE (Distinct Dynamic Searchable Symmetirc Encryption) is an ongoing program that aims to secure distinct search in EDB. 
 We release our test code for future securtiy programs on EDB systems.
 
 
@@ -56,10 +56,10 @@ Most codes provide shell commands in our test like:
 
 In detail, please see the dependency and useage instruction parts for each test:
 
-[MITRA*](Scheme_MITRAPP/README.md)
+[Mitra$^P$](Scheme_MITRAPP/README.md)
 
 
-[BF-IPE](Scheme_BF-IPE-P/README.md)
+[Aura$^P$](Scheme_Aura/README.md)
 
 
 [BF-SRE](Scheme_BF-SRE/README.md)
@@ -68,7 +68,7 @@ In detail, please see the dependency and useage instruction parts for each test:
 [Comparision with Seal](Simulate_Seal_in_python/README.md)
 
 
-[Comparision with ShieldDB](Compare_ShieldDB/README.md)
+[Comparision with ShieldDB](Compare_ShieldDB/README.md) 
 
 
 [Query recover rate of d-DSE, Seal, and ShieldDB](BVA-BVMA-DDSE_ShielDB_Seal/README.md)
