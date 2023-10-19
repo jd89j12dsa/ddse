@@ -40,7 +40,7 @@ mv ./Var/DDSECrimeC/prob_clusters ./a256
 
 ```
 line 41: alpha = 256
-line 43: keyword_num = 26144
+line 43: keyword_num = 34611
 line 46: clusters_point_set="DDSECrimeC_cluster_points.csv"
 line 47: clusters_dist = "DDSECrimeC_cluster_dists.csv"
 line 48: alpha_data_set = [256,]
