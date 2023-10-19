@@ -35,7 +35,7 @@ The python version is v3.6.0
 
 ### Datasets:
 
-In DB_Gen folder, we provide the Crimes, VAERS, and Wikipedia datasets dumped from MongoDB.
+In DB_Gen folder, we provide the Crimes, Wikipedia, and Enron datasets dumped from MongoDB.
 
 To restore dumped dataset in MongoDB:
 
