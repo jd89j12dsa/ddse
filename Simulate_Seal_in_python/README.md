@@ -13,7 +13,7 @@ sudo python3.6 setup_ORAM.py install
 ## Usage Instructions
 
 
-We provide an exmaple for Seal on the Crimes dataset, which sets parameters `a=15,x=4`.
+We provide an exmaple for Seal on the Crimes dataset, which sets parameters `a=20,x=4`.
 
 To start the test, run the shell code in the current folder:
 
