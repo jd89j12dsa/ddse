@@ -23,9 +23,7 @@ std::vector<int> removeDuplicates(const std::vector<int>& inputVector, std::map<
         int real_num; 
         if (num>= 20000000) continue;
         real_num = inputMap[num];
-        // 检查当前元素是否已经存在于结果向量中
         if (std::find(resultVector.begin(), resultVector.end(), real_num) == resultVector.end()) {
-            // 如果不存在，将其添加到结果向量中
             resultVector.push_back(real_num);
         }
     }
@@ -49,24 +47,23 @@ int main(int argc, char* argv[]) {
 
     dup>>rev_num;
 
-    // 逐行读取字符串
     while (dup>>fake_id>>real_id) {
         restore[fake_id] = real_id;
     }    
 
     dup.close();
 
-    std::ifstream file(argv[1],std::ifstream::in);  // 替换为实际文件路径
+    std::ifstream file(argv[1],std::ifstream::in);  
 
     cout << "read " << argv[1] <<endl;
 
     if (!file) {
-        std::cerr << "无法打开文件." << std::endl;
+        std::cerr << "fail." << std::endl;
         return 1;
     }
 
     int numRecords;
-    file >> numRecords;  // 读取操作记录的数量
+    file >> numRecords;  
 
     std::vector<Record> records;
 
@@ -75,13 +72,12 @@ int main(int argc, char* argv[]) {
     int part2,part3;
     std::getline(file, line);
 
-    // 逐行读取操作记录
     for (int i = 0; i < numRecords; ++i) {
-        std::getline(file, line);  // 读取一行操作记录
+        std::getline(file, line);  
         // cout<< line << endl;
         std::istringstream iss(line);
         if (!(iss >> part1 >> part2 >> part3)) {
-            std::cerr << "解析操作记录时发生错误." << std::endl;
+            std::cerr << "fail." << std::endl;
             return 1;
         }
 
@@ -123,10 +119,8 @@ int main(int argc, char* argv[]) {
         auto it = volume_update.find(record.part2);
 
         if (it != volume_update.end()) {
-        // 找到了
             it->second += cahc;
         } else {
-        // 没找到
             volume_update[record.part2] = cahc;
         }
         // auto endu = std::chrono::steady_clock::now();
@@ -137,25 +131,25 @@ int main(int argc, char* argv[]) {
     end = std::chrono::steady_clock::now();
 
     tt = std::chrono::duration_cast<microseconds>(end-start);
-    cout << "Update " << tt.count() << "us" << endl;
-    cout << "Update Size" << client.get_updatesize() << "bytes" << endl;
+    //cout << "Update " << tt.count() << "us" << endl;
+    //cout << "Update Size" << client.get_updatesize() << "bytes" << endl;
 
     for (const auto &pair : volume_update) {
         std::cout << "Keyword: \t" << pair.first << "\t, Value: \t" << pair.second << std::endl;
     }
 
     cout << argv[2] << endl;
-    std::ifstream task(argv[2],std::ifstream::in);  // 替换为实际文件路径
+    std::ifstream task(argv[2],std::ifstream::in);  
 
     if (!task) {
-        std::cerr << "无法打开文件." << std::endl;
+        std::cerr << "fail." << std::endl;
         return 1;
     }
 
     std::vector<int> values;
     int value;
 
-    // 逐行读取字符串
+
     while (task>>value) {
         values.push_back(value);
     }
