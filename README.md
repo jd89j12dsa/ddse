@@ -41,9 +41,7 @@ To restore dumped dataset in MongoDB:
 
 ```
 cd ./DB_Gen
-mongorestore --db DDSECrimeC ./
-mongorestore --db DDSE2022VAERSVAXC ./
-mongorestore --db DSEWikiC ./
+  mongorestore --db Crime_USENIX ./
 cd ../
 ```
 
