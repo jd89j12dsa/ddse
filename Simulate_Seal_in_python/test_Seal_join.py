@@ -37,7 +37,6 @@ def Setup_phase(test_alpha,test_axe):
 	Dataset = dict()
 
 	for plaintext in plaintext_cur:
-		# print(plaintext)
 		Dataset[plaintext['k']] = plaintext['val_set']
 
 	ts = time.time()
@@ -58,7 +57,8 @@ def Search_phase():
 	global plaintextdb,seal
 	search_col = plaintextdb["id_keyword_search_list"]
 	plaintext_cur = search_col.find(no_cursor_timeout=True).batch_size(1000)
-	task_search = [[x["Search_from"],x["Search_to"]] for x in plaintext_cur]
+	x = plaintext_cur
+	task_search = [x["k"] for x in plaintext_cur]
 
 	# Top 1000 	
 
@@ -68,33 +68,15 @@ def Search_phase():
 	wiki_wl_v_off = {}
 	cnt = 0
 
-	Search_overloop_c1 = 0
-	for i in range(10):
+	for keyword in task_search:
 		ts = time.time()
-		result = seal.Search_overloop_1('-1')
-		te = time.time()
-		Search_overloop_c1+= te-ts
-	Search_overloop_c1 = Search_overloop_c1/10
-
-	result_len['-1'] = 0
-	result_size['-1'] = 0
-	Search_time['-1'] = Search_overloop_c1
-
-	for Fname, keywords in task_search:
-		Fname_time = 0
-		Fname_result_len = 0
-		Fname_result_size = 0
-		for keyword in keywords:
-			ts = time.time()
-			result = seal.Search(keyword)
-			result = list(filter(lambda x: x != '-1', result))
-			result = list(set(result))
-			Fname_time += time.time()-ts
-			Fname_result_len += len(result)
-			Fname_result_size += len(result)*Maintain_Consistent_com_level_ShieldDB
-		Search_time[Fname] = Fname_time
-		result_len[Fname] = Fname_result_len
-		result_size[Fname] = Fname_result_size
+		result = seal.Search(keyword)
+		result_len[keyword] = len(result)
+		result_size[keyword] = len(result)
+		wiki_wl_v_off[cnt] = len(result)
+		result = list(filter(lambda x: x != '-1', result))
+		result = list(set(result))
+		Search_time[keyword] = time.time() - ts
 
 	print('Search_success')
 	write_search_time(test_group,Search_time, result_len,result_size)
@@ -110,7 +92,7 @@ def write_search_time(test_group,Search_time, result_len,result_size):
 	filename = open( resultpath + str(test_group),'w')
 
 	for ke in Search_time:
-		filename.writelines('keyword:\t'+str(ke) +'\t'+ str(Search_time[ke])+ '\t' +  str(result_len[ke]) + '\t' +str(result_size[ke]/1024) + 'KB' + '\n')
+		filename.writelines('keyword:\t'+str(ke) +'\t'+ str(Search_time[ke])+ '\t' +  str(result_len[ke]) + '\t' +result_size[ke] + 'num' + '\n')
 	filename.close()
 
 
@@ -130,9 +112,6 @@ if __name__ == '__main__':
 	test_db_name = str(sys.argv[1])
 
 	# Since Seal did not specify the dummy ciphertext length, we set parameters to eliminate this impact between Seal and ShieldDB
-
-	Maintain_Consistent_com_level_ShieldDB = 20
-	
 	test_group = str(sys.argv[2])
 	test_alpha = int(sys.argv[3])
 	test_axe = int(sys.argv[4])
