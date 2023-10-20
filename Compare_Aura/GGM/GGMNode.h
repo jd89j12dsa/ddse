@@ -1,7 +1,3 @@
-//
-// Created by shangqi on 2020/6/20.
-//
-
 #ifndef AURA_GGMNODE_H
 #define AURA_GGMNODE_H
 
