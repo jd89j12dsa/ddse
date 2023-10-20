@@ -1,3 +1,1 @@
-python3.6 SDd_support.py Crime_USENIX
-python3.6 SDd_support.py VAX_USENIX
-python3.6 SDd_support.py Wiki_USENIX
+python3.6 Aura_plan.py Crime_USENIX
