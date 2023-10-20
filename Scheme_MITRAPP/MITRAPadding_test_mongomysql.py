@@ -32,20 +32,18 @@ def closest_power_of_4(num):
     return 4 ** power
 
 def fill_and_remove_duplicates(input_list, min_val, max_val):
-    # 去除重复数据
+
     unique_list = list(set(input_list))
 
-    # 将列表的大小扩展到最接近的4的幂次方
     target_size = closest_power_of_4(len(input_list))
 
-    # 填充列表
     while len(unique_list) < target_size:
         unique_list.append(min_val)
         min_val += 1
         if min_val > max_val:
             break
 
-    return unique_list[:target_size]  # 截取最终结果列表的前 target_size 个元素
+    return unique_list[:target_size]
 
 def create_mysql_table ():
 	connection = pymysql.connect(host='localhost',user='root', password='root', charset='ASCII')
@@ -337,7 +335,7 @@ def Search_Phase():
 		result_len[keyword] = len(re) + len(Keywords_Cipher)
 		match_len[keyword] = sum([sys.getsizeof(rei) for rei in re]) + sum([sys.getsizeof(Keyw) for Keyw in Keywords_Cipher])
 		Search_time[keyword] = time_e-time_s
-		print('keyword:\t'+str(keyword) +'\t'+ str(latency[keyword]) + '\t' + str(Search_time[keyword])+ '\t' + str(match_len[keyword])+'\t'+ str(result_len[keyword])+ '\n')
+		#print('keyword:\t'+str(keyword) +'\t'+ str(latency[keyword]) + '\t' + str(Search_time[keyword])+ '\t' + str(match_len[keyword])+'\t'+ str(result_len[keyword])+ '\n')
 
 	
 	write_search_time(test_group,latency,Search_time, match_len,result_len)
