@@ -1,7 +1,3 @@
-//
-// Created by shangqi on 2020/11/18.
-//
-
 #ifndef AURA_SSECLIENT_H
 #define AURA_SSECLIENT_H
 
