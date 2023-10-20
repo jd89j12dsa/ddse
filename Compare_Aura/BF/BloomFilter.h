@@ -1,6 +1,3 @@
-//
-// Created by shangqi on 2020/6/17.
-//
 
 #ifndef AURA_BLOOMFILTER_H
 #define AURA_BLOOMFILTER_H
