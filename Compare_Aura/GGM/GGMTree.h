@@ -1,7 +1,3 @@
-//
-// Created by shangqi on 2020/6/20.
-//
-
 #ifndef AURA_GGMTREE_H
 #define AURA_GGMTREE_H
 
