@@ -169,7 +169,7 @@ int main(int argc, char* argv[]) {
     auto tt1 = std::chrono::duration_cast<microseconds>(end1-start1);
 
 
-    cout << str << '\t' << "Search_D" << '\t'<< tt1.count() << "\tus" << resultVector.size() << "\t" << "Search_S" << '\t' << values[i] << '\t' << results.size() << '\t' << tt.count() << '\t' << "us" << endl;
+    cout << str << '\t' << "Search_D" << '\t'<< tt1.count() << "\tus\t" << "Search_S" << '\t' << tt.count() << '\t' << "us" << endl;
 
     }
 
