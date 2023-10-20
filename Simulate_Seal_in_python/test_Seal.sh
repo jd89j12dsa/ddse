@@ -1,2 +1,1 @@
-#python3.6 test_Seal.py ToyDDSECrime 701 15 2
-python3.6 test_Seal.py DDSECrimeC 701 20 4
+python3.6 Qplan_Seal.py Crime_USENIX 701 20 4
