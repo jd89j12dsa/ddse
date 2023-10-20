@@ -1,7 +1,3 @@
-//
-// Created by shangqi on 2020/6/17.
-//
-
 #include "Core/SSEServerHandler.h"
 
 SSEServerHandler::SSEServerHandler() {
