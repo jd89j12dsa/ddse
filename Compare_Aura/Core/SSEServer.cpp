@@ -1,7 +1,3 @@
-//
-// Created by shangqi on 2020/11/18.
-//
-
 #include "SSEServer.h"
 
 SSEServer::SSEServer() {
