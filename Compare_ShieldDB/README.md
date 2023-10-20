@@ -10,6 +10,7 @@ Install [ShieldDB](https://github.com/MonashCybersecurityLab/ShieldDB).
 ```git clone https://github.com/MonashCybersecurityLab/ShieldDB.git```
 
 NOTE: The RocksDB version mentioned in the original is out of date, please use RocksDB v6.22.1 and the corresponding gflags v2.2.2.
+We edit the query operation for join query
 
 ## Usage Instructions
 
