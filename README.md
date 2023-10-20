@@ -59,7 +59,7 @@ In detail, please see the dependency and useage instruction parts for each test:
 [Mitra$^P$](Scheme_MITRAPP/)
 
 
-[Aura$^P$](Scheme_Aura/)
+[Aura$^P$](Compare_Aura/)
 
 
 [BF-SRE](Scheme_BF-SRE/)
