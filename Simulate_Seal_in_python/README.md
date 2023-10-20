@@ -18,3 +18,5 @@ We provide an exmaple for Seal on the Crimes dataset, which sets parameters `a=2
 To start the test, run the shell code in the current folder:
 
 ```sh test_Seal.sh```
+
+Q_plan_Seal_join.py is our another instance for join query
