@@ -54,13 +54,13 @@ Most codes provide shell commands in our test like:
 
 In detail, please see the dependency and useage instruction parts for each test:
 
+[BF-SRE](BF-SRE/)
+
+
 [Mitra$^P$](Compare_MITRAp/)
 
 
 [Aura$^P$](Compare_AURAp/)
-
-
-[BF-SRE](BF-SRE/)
 
 
 [Comparision with Seal](Compare_Seal/)
