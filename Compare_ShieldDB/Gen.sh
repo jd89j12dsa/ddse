@@ -1,1 +1,0 @@
-python3.6 ShieldDB_Supporter.py DDSECrimeC 256
