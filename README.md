@@ -41,7 +41,7 @@ To restore dumped dataset in MongoDB:
 
 ```
 cd ./DB_Gen
-  mongorestore --db Crime_USENIX ./
+  mongorestore --db (dataset_folder name) ./(dataset_folder name)
 cd ../
 ```
 
@@ -54,16 +54,16 @@ Most codes provide shell commands in our test like:
 
 In detail, please see the dependency and useage instruction parts for each test:
 
-[Mitra$^P$](Scheme_MITRAPP/)
+[Mitra$^P$](Compare_MITRAp/)
 
 
-[Aura$^P$](Compare_Aura/)
+[Aura$^P$](Compare_AURAp/)
 
 
-[BF-SRE](Scheme_BF-SRE/)
+[BF-SRE](BF-SRE/)
 
 
-[Comparision with Seal](Simulate_Seal_in_python/)
+[Comparision with Seal](Compare_Seal/)
 
 
 [Comparision with ShieldDB](Compare_ShieldDB/) 
@@ -76,5 +76,3 @@ d-DSE is released under the [MIT License](./LICENSE).
 ## Contact
 
 For any questions or inquiries regarding d-DSE, feel free to reach out to the project maintainers via email or open an issue on GitHub.
-
-We hope you find d-DSE project helpful and enjoy exploring the exciting world of encrypted database systems!
