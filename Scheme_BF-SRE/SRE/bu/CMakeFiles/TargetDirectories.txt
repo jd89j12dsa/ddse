@@ -1,3 +1,0 @@
-/home/ldl/DSE/SRE/bu/CMakeFiles/SRE.dir
-/home/ldl/DSE/SRE/bu/CMakeFiles/edit_cache.dir
-/home/ldl/DSE/SRE/bu/CMakeFiles/rebuild_cache.dir
