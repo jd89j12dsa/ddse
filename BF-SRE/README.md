@@ -21,7 +21,7 @@ pip3.6 install pathos
 ## Usage Instructions
 
 
-We provide an exmaple for BF-IPE on the Crime dataset without deletion operations.
+We provide an exmaple for BF-SRE on the Crime dataset without deletion operations.
 
 To start the test, run the shell code in the current folder:
 
