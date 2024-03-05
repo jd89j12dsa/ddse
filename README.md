@@ -13,7 +13,7 @@ The python version is v3.6.0
 
 ### Install Basic Dependency
 
-1. Install <u>MongoDB</u> to provide datasets for various tests 
+1. Install <u>MongoDB</u> (version 2.6.10) to provide datasets for various tests 
 
 ```sudo apt-get install mongodb```
 
@@ -21,7 +21,7 @@ The python version is v3.6.0
 
 ```pip3.6 install pymongo```
 
-3. Install <u>MySQL</u> to provide ciphertext storage
+3. Install <u>MySQL</u>  to provide ciphertext storage
 
 ```sudo apt-get install mysql-server```
 
