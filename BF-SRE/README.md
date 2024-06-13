@@ -9,7 +9,7 @@
 sudo python3.6 setup_DDSE2.py install
 sudo python3.6 setup_Diana.py install
 cd ./SRE
-python3.6 cSRE_setup.py install
+sudo python3.6 cSRE_setup.py install
 cd ..
 ```
 
