@@ -64,7 +64,7 @@ def Search_phase():
 		result_len.append(len(result))
 		result_size.append(result_S)
 
-	resulthead = ['Keyword','Total_search', 'result_len','comm_len']
+	resulthead = ['Keyword','Total_search', 'result_len','comm_size']
 	resultname = test_group
 	resulttable = [keyword_set,Search_time,result_len,result_size] 
 	resultpath = "./Result/Search/Seal/"+test_db_name+'/'
