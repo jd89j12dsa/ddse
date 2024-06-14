@@ -28,4 +28,4 @@ We provide an exmaple for BF-SRE on the Crime dataset without deletion operation
 
 To start the test, run the shell code in the current folder:
 
-```sh test_BF-SRE.sh```
+```sh test.sh```
