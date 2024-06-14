@@ -1,1 +1,8 @@
-python3.6 BF-SRE.py Crime_USENIX_REV_TOY cs 24021101 0 0
+script_path=$(cd "$(dirname "$0")" && pwd)
+
+mkdir ./result
+
+$script_path/AuraServer &
+$script_path/AuraClient $script_path/dataset/Crime_USENIX_REV_TOY 0 0 > $script_path/result/Crime_USENIX_REV_TOY
+pkill AuraServer
+
