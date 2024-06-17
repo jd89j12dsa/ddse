@@ -92,7 +92,7 @@ int search_the_DB(char* ca1, int ia2)
     auto end = std::chrono::steady_clock::now();
     auto tt = std::chrono::duration_cast<microseconds>(end-start);
     auto start1 = std::chrono::steady_clock::now();
-    int Commu_size = results.size()*20; // the size of minimal AES cipher
+    int Commu_size = results.size()*80; // the size of minimal AES cipher in UNI-CODE
     std::vector<int> resultVector = removeDuplicates(results,restore);
     auto end1 = std::chrono::steady_clock::now();
     auto tt1 = std::chrono::duration_cast<microseconds>(end1-start1);
