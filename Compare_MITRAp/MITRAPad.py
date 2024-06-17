@@ -221,7 +221,7 @@ def Search_Phase(l_del_rate):
 		result_len.append(len(re) + len(Keywords_Cipher))
 		Client_search.append(client_time)
 		Total_search.append(total_search_time)
-		comm_len.append(sum([sys.getsizeof(rei) for rei in re]) + sum([sys.getsizeof(Keyw) for Keyw in Keywords_Cipher]))
+		comm_len.append(sum([sys.getsizeof(rei) for rei in re]) + sum([sys.getsizeof(Keyw[0])+sys.getsizeof(Keyw[1]) for Keyw in Keywords_Cipher]))
 
 	print(l_del_rate,"success")
 
