@@ -5,11 +5,30 @@ We release our test code for future securtiy programs on EDB systems.
 
 
 ## How to Run
+
 ### Environment
 
 Our experimental system is Ubuntu Server 16.04 x64
 
 The python version is v3.6.0
+
+
+### Quick Setup
+
+We would like to thank reviewers for quick setup via Docker (version 18.09.7) on Ubuntu Server 16.04 x64.
+In the `ddse' folder, the following command can build the docker container to test our codes:
+
+```
+cd ./ddse/dockerfile
+sudo docker build -t test ./
+sudo docker run --name testddse -p 80:80 -it test
+
+(in docker container)
+root@2882cbe0c7a4:/ddse\$ nohup mongod &
+```
+
+After establishment, we can follow instructions from Section A.3.2 and A.4 to test experiments.
+
 
 ### Install Basic Dependency
 
