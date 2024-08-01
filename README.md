@@ -27,7 +27,7 @@ sudo docker run --name testddse -p 80:80 -it test
 root@2882cbe0c7a4:/ddse\$ nohup mongod &
 ```
 
-After establishment, we can follow instructions from Section A.3.2 and A.4 to test experiments.
+After establishment, we can follow Tests instructions for experiments.
 
 
 ### Install Basic Dependency
